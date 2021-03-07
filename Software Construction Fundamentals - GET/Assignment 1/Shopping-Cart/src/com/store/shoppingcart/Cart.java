@@ -13,9 +13,12 @@ import java.util.Map;
 public class Cart {
 	private final static Map<String, Item> storeItems = new HashMap<String, Item>();
 	private final Map<String, Item> cartItems = new HashMap<String, Item>();
-
-	public Cart() {
+	static {
 		initStoreItems();
+	}
+
+	// Default constructor
+	public Cart() {
 	}
 
 	/**
