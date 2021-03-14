@@ -10,16 +10,16 @@ import java.util.LinkedList;
  * @since 2021-03-11
  */
 public class Node {
-	private String name;
+	private String vertex;
 	private LinkedList<Edge> edgeList;
 
-	public Node(String name) {
-		this.name = name;
+	public Node(String vertex) {
+		this.vertex = vertex;
 		edgeList = new LinkedList<>();
 	}
 
-	public String getName() {
-		return name;
+	public String getVertex() {
+		return vertex;
 	}
 
 	public LinkedList<Edge> getEdges() {

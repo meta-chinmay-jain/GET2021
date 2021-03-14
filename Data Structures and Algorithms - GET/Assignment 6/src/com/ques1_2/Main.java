@@ -1,5 +1,7 @@
 package com.ques1_2;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Scanner;
 
 /**
@@ -41,12 +43,12 @@ public class Main {
 		graph.addEdge(v1, v2, 3);
 		graph.addEdge(v2, v0, 1);
 		graph.addEdge(v2, v3, 1);
-		graph.addEdge(v3, v2, 4);
+		graph.addEdge(v3, v1, 4);
 
 		Integer choice;
 
 		while (true) {
-			System.out.println("\nMENU");
+			System.out.println("\nMENU\n");
 			System.out.println("1. Is Graph Connected?");
 			System.out.println("2. Find Reachable Vertices");
 			System.out.println("3. Minimum Spanning Tree");
@@ -91,24 +93,75 @@ public class Main {
 		}
 	}
 
+	// takes user input, calls shortestPath() method of graph and displays result
 	private static void findShortestPath() {
-		// TODO Auto-generated method stub
+		System.out.print("\nEnter Source Vertex: ");
+		String source = input.nextLine().trim();
 
+		System.out.print("Enter Destination Vertex: ");
+		String dest = input.nextLine().trim();
+
+		ArrayList<Edge> path = graph.shortestPath(source, dest);
+
+		if (null != path) {
+			System.out.println("\nShortest Path:");
+
+			int cost = 0;
+			String sourceToDest = "";
+			for (Edge edge : path) {
+				sourceToDest = "\n" + edge.getSourceVertex().getVertex() + "->" + edge.getDestVertex().getVertex()
+						+ sourceToDest;
+				cost += edge.getWeight();
+			}
+			System.out.println(sourceToDest);
+			System.out.println("\nTotal Cost: " + cost);
+		} else {
+			System.out.println("\nPath could not be found!");
+		}
 	}
 
+	// calls minSpanningTree() method of graph and displays result
 	private static void minimumSpanningTree() {
-		// TODO Auto-generated method stub
+		ArrayList<Edge> edges = graph.minSpanningTree();
+		int cost = 0;
 
+		if (null != edges) {
+			System.out.println("\nEdges in MST:\n");
+
+			for (Edge edge : edges) {
+				System.out.println(edge.getSourceVertex().getVertex() + " -- " + edge.getDestVertex().getVertex()
+						+ " == " + edge.getWeight());
+				cost += edge.getWeight();
+			}
+
+			System.out.println("\nMinimum Cost Spanning Tree: " + cost);
+		} else {
+			System.out.println("\nMinimum Spanning Tree could not be found!");
+		}
 	}
 
+	// takes user input, calls reachable() method of graph and displays result
 	private static void findReachable() {
-		// TODO Auto-generated method stub
+		System.out.print("\nEnter vertex: ");
+		String vertex = input.nextLine().trim();
 
+		HashSet<Node> nodes = graph.reachable(vertex);
+		if (null != nodes) {
+			for (Node node : nodes) {
+				System.out.println("Vertex: " + node.getVertex());
+			}
+		} else {
+			System.out.println("\nEntered vertex does not exist!");
+		}
 	}
 
+	// calls isConnected() method of graph and displays result
 	private static void checkIsConnected() {
-		// TODO Auto-generated method stub
-
+		if (graph.isConnected()) {
+			System.out.println("\nYes, graph is connected.");
+		} else {
+			System.out.println("\nNo, graph is NOT connected.");
+		}
 	}
 
 	/**
