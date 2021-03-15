@@ -1,6 +1,7 @@
 package com.ques2;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Scanner;
 
 /**
@@ -33,9 +34,9 @@ public class MyString {
 		}
 
 		// storing character and it's frequency in a string
-		HashMap<Character, Integer> uniqueCharInString = new HashMap<Character, Integer>();
+		HashSet<Character> uniqueCharInString = new HashSet<Character>();
 		for (char ch : str.toCharArray()) {
-			uniqueCharInString.put(ch, uniqueCharInString.getOrDefault(ch, 0) + 1);
+			uniqueCharInString.add(ch);
 		}
 
 		int count = uniqueCharInString.size();
